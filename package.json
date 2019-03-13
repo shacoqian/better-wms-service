@@ -1,0 +1,25 @@
+{
+  "name": "better-wms-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shacoqian/better-wms-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shacoqian/better-wms-service/issues"
+  },
+  "homepage": "https://github.com/shacoqian/better-wms-service#readme",
+  "dependencies": {
+    "egg": "^2.20.1"
+  },
+  "devDependencies": {
+    "egg-bin": "^4.11.1"
+  }
+}
