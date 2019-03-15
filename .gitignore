@@ -1,6 +1,21 @@
 .DS_Store
 node_modules
-/dist
+package-lock.json
+run
+.idea
+logs/
+npm-debug.log
+node_modules/
+coverage/
+.idea/
+run/
+.DS_Store
+*.swp
+package-lock.json
+app/public
+logs
+*.log
+
 
 # local env files
 

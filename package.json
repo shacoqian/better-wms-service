@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit-msg": "echo 'Pre-commit checks...'; exit 0",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "debug": "egg-bin debug",
+    "prod": "EGG_SERVER_ENV=prod ENABLE_NODE_LOG=YES egg-scripts start --daemon --port 5000 --title=service-better-wms",
+    "sit": "EGG_SERVER_ENV=sit ENABLE_NODE_LOG=YES  egg-scripts start --port 5000 --daemon --title=service-better-wms",
+    "local": "cross-env EGG_SERVER_ENV=local egg-bin dev --port 5000 ",
+    "stop": "egg-scripts stop --title=service-better-wms"
   },
   "repository": {
     "type": "git",
@@ -17,9 +25,23 @@
   },
   "homepage": "https://github.com/shacoqian/better-wms-service#readme",
   "dependencies": {
-    "egg": "^2.20.1"
+    "crypto-js": "^3.1.9-1",
+    "egg": "^2.20.1",
+    "egg-redis": "^2.3.0",
+    "egg-sequelize": "^4.3.1",
+    "egg-validate": "^2.0.2",
+    "moment": "^2.24.0",
+    "mysql2": "^1.6.5",
+    "number-precision": "^1.3.1",
+    "only": "0.0.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "egg-bin": "^4.11.1"
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
+    "egg-bin": "^4.11.1",
+    "eslint": "^5.15.1",
+    "eslint-config-egg": "^7.2.0",
+    "pre-commit": "^1.2.2"
   }
 }
