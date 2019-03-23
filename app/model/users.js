@@ -8,7 +8,7 @@ module.exports = app => {
     TINYINT
   } = app.Sequelize
 
-  const users = app.model.define('users', {
+  const Users = app.model.define('users', {
     user_id: {
       type: BIGINT(20),
       autoIncrement: true,
@@ -63,10 +63,22 @@ module.exports = app => {
         notEmpty: true,
       },
     },
+    salt: {
+      type: STRING(10),
+      validate: {
+        notEmpty: true,
+      },
+    },
+    password: {
+      type: STRING(32),
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     freezeTableName: true,
     version: true,
   })
 
-  return users
+  return Users
 }

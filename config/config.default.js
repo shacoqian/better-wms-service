@@ -15,9 +15,9 @@ module.exports = app => {
     },
   }
 
-  // if (process.env.EGG_SERVER_ENV === 'local') {
-  //   config.security.domainWhiteList = [ 'http://localhost:3000' ]
-  // }
+  if (process.env.EGG_SERVER_ENV === 'local') {
+    config.security.domainWhiteList = [ 'http://localhost:9527' ]
+  }
 
   config.bodyParser = {
     jsonLimit: '10mb',
@@ -28,20 +28,20 @@ module.exports = app => {
   }
 
   // redis
-  // config.redis = {
-  //   client: {
-  //     port: 6379,
-  //     host: '47.100.111.190',
-  //     password: '',
-  //     db: 0,
-  //   },
-  // }
+  config.redis = {
+    client: {
+      port: 6380,
+      host: '127.0.0.1',
+      password: '123456',
+      db: 0,
+    },
+  }
 
   exports.sequelize = {
     dialect: 'mysql',
     database: 'common_auth',
     host: '127.0.0.1',
-    port: 3306,
+    port: 3307,
     username: 'root',
     password: '123456',
     delegate: 'model',

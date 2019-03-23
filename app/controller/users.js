@@ -3,9 +3,6 @@
 const BaseController  = require('./base')
 
 class UsersController extends BaseController {
-  async createAdmin() {
-
-  }
 
   /**
    * @descrition 登录系统
@@ -13,27 +10,42 @@ class UsersController extends BaseController {
    * @params {string} password 密码
    */
   async login() {
-
     const { ctx } = this
     const { email, password } = ctx.request.query
     const rules = require('../rules/users/login')
+    const { encryptPassword } = require('../util/users')
     try {
       ctx.validate(rules, { email, password })
-      
+      let userInfo = await this.ctx.service.users.findOneByEmail(email)
+      if (! userInfo) 
+        return ctx.fail('用户不存在')
 
-      
+      let enpassword = encryptPassword(password, userInfo.salt)
+      if (enpassword.encryptPassword != userInfo.password) 
+        return ctx.fail('用户名或密码错误！')
+
+      if (! this.app.setLoginUser(userInfo.user_uuid, userInfo)) 
+        return ctx.fail('登录失败，请重试')
+      return ctx.success(userInfo)
     } catch( e ) {
-      ctx.fail(e)
+      return ctx.fail(e)
     }
-    
-    // console.log(validateResult)
-    // if (! validateResult) {
-    //   return 
-    // }
-
-
-
   }
+
+  /**
+   * @description 退出登录
+   * @params {string} user_uuid
+   */
+  async logout() {
+    let {
+      user_uuid
+    } = this.ctx.request.query
+    await this.ctx.app.removeLoginUser(user_uuid)
+    return this.ctx.success()
+  }
+
+  
+
 }
 
 module.exports = UsersController
