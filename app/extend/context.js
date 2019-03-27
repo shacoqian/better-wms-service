@@ -60,4 +60,13 @@ module.exports = {
 
     return this
   },
+  getPageIndex() {
+    return Math.abs(this.request.query.pageIndex) || 1
+  },
+  getPageSize() {
+    return Math.abs(this.request.query.pageSize) || 10
+  },
+  getPageOffset() {
+    return (this.getPageIndex() - 1) * this.getPageSize()
+  },
 }

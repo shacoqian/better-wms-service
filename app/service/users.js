@@ -22,6 +22,26 @@ class UsersService extends BaseService {
     })
   }
 
+  /**
+   * @description 分页获取用户信息
+   */
+  async findAll() {
+    const { Users } = this.app.model
+    console.log(this.app.model)
+
+    const offset = this.ctx.getPageOffset(),
+      limit = this.ctx.getPageSize()
+
+    return Users.findAndCountAll({
+      attributes: ['user_id', 'user_uuid', 'user_name', 'telphone', 'nick_name', 'email'],
+      where: {
+        disabled: 1,
+      },
+      offset,
+      limit
+    })
+  }
+
 
 }
 

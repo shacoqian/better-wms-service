@@ -11,9 +11,10 @@ class UsersController extends BaseController {
    */
   async login() {
     const { ctx } = this
-    const { email, password } = ctx.request.query
+    const { email, password } = ctx.request.body
     const rules = require('../rules/users/login')
     const { encryptPassword } = require('../util/users')
+    console.log(email)
     try {
       ctx.validate(rules, { email, password })
       let userInfo = await this.ctx.service.users.findOneByEmail(email)
@@ -44,7 +45,14 @@ class UsersController extends BaseController {
     return this.ctx.success()
   }
 
-  
+  /**
+   * @description 获取用户列表
+   * 
+   */
+  async list() {
+    let users = await this.ctx.service.users.findAll()
+    return this.ctx.success(users)
+  }
 
 }
 
